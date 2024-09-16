@@ -9,10 +9,11 @@ import { useRouter } from "next/navigation";
 
 type BookProps = {
     book: BookType;
+    isPurchased: boolean;
 };
 
 // eslint-disable-next-line react/display-name
-const Book = ({ book }: BookProps) => {
+const Book = ({ book, isPurchased }: BookProps) => {
     const [showModal, setShowModal] = useState(false);
     const { data: session } = useSession();
     const user: any = session?.user;
@@ -21,7 +22,7 @@ const Book = ({ book }: BookProps) => {
     const startCheckout = async () => {
         try {
             const response = await fetch(
-                '${process.env.NEXT_PUBLIC_API_URL}/checkout',
+                `${process.env.NEXT_PUBLIC_API_URL}/checkout`,
                 {
                     method: "POST",
                     headers: { "Content-Type": "application/json" },
@@ -45,7 +46,11 @@ const Book = ({ book }: BookProps) => {
     };
 
     const handlePurchaseClick = () => {
-        setShowModal(true);
+        if (isPurchased) {
+            alert("その商品は購入済みです。");
+        } else {
+            setShowModal(true);
+        }
     };
 
     const handleCancel = () => {
