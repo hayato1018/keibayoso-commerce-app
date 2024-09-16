@@ -8,7 +8,7 @@ const DetailBook = async ({ params }: { params: { id: string } }) => {
         <div className="container mx-auto p-4">
             <div className="bg-white shadow-lg rounded-lg overflow-hidden">
                 <Image
-                    src={book.thumbnail.url}
+                    src={book.thumbnail?.url || '/default-thumbnail.jpg'}
                     className="w-full h-80 object-cover object-center"
                     width={700}
                     height={700}
