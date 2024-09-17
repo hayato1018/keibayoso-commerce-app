@@ -1,4 +1,3 @@
-// "use client";
 import Book from "./components/Book";
 import { BookType, Purchase, User } from "./types/types";
 import { getAllBooks } from "./lib/microcms/client";
@@ -11,7 +10,7 @@ export default async function Home() {
   const session = await getServerSession(nextAuthOptions);
   const user = session?.user as User;
 
-  let purchaseBookIds: string[];
+  let purchaseBookIds: string[] = [];
 
   if (user) {
     const response = await fetch(
