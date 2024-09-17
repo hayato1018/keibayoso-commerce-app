@@ -9,6 +9,9 @@ export const client = createClient({
 export const getAllBooks = async () => {
     const allBooks = await client.getList<BookType>({
         endpoint: "keibayosocommerce",
+        customRequestInit: {
+            cache: "no-store",
+        },
     });
 
     return allBooks;
@@ -18,6 +21,9 @@ export const getDetailBook = async (contentId: string) => {
     const detailBook = await client.getListDetail<BookType>({
         endpoint: "keibayosocommerce",
         contentId,
+        customRequestInit: {
+            cache: "no-store",
+        },
     });
 
     return detailBook;
