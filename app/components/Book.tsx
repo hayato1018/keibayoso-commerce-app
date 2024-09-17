@@ -8,7 +8,7 @@ import { useRouter } from "next/navigation";
 
 type BookProps = {
     book: BookType;
-    user: User;
+    user?: User;
     isPurchased: boolean;
 };
 

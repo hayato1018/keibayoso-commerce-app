@@ -8,8 +8,7 @@ import { nextAuthOptions } from "./lib/next-auth/options";
 export default async function Home() {
   const { contents } = await getAllBooks();
   const session = await getServerSession(nextAuthOptions);
-  const user = session?.user as User;
-
+  const user = session?.user as User | undefined;
   let purchaseBookIds: string[] = [];
 
   if (user) {
@@ -22,23 +21,23 @@ export default async function Home() {
     purchaseBookIds = purchasesData.map(
       (purchase: Purchase) => purchase.bookId
     );
-
-    return (
-      <>
-        <main className="flex flex-wrap justify-center items-center md:mt-32 mt-20">
-          <h2 className="text-center w-full font-bold text-3xl mb-2">
-            Book Commerce
-          </h2>
-          {contents.map((book: BookType) => (
-            <Book
-              key={book.id}
-              book={book}
-              user={user}
-              isPurchased={purchaseBookIds.includes(book.id)}
-            />
-          ))}
-        </main>
-      </>
-    );
   }
+
+  return (
+    <>
+      <main className="flex flex-wrap justify-center items-center md:mt-32 mt-20">
+        <h2 className="text-center w-full font-bold text-3xl mb-2">
+          Book Commerce
+        </h2>
+        {contents.map((book: BookType) => (
+          <Book
+            key={book.id}
+            book={book}
+            user={user}
+            isPurchased={purchaseBookIds.includes(book.id)}
+          />
+        ))}
+      </main>
+    </>
+  );
 }
