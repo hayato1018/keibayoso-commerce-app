@@ -3,7 +3,7 @@
 import Image from "next/image";
 import { BookType, User } from "../types/types";
 import { useState } from "react";
-import { useSession } from "next-auth/react";
+//import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
 
 type BookProps = {

@@ -1,6 +1,6 @@
 import { getDetailBook } from "@/app/lib/microcms/client";
 import Image from "next/image";
-import React, { useEffect } from "react";
+//import React, { useEffect } from "react";
 
 const DetailBook = async ({ params }: { params: { id: string } }) => {
     const book = await getDetailBook(params.id);
