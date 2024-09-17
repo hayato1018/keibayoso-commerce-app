@@ -10,7 +10,7 @@ export default async function Home() {
   const session = await getServerSession(nextAuthOptions);
   const user = session?.user as User;
 
-  //let purchaseBookIds: string[] = [];
+  let purchaseBookIds: string[] = [];
 
   if (user) {
     const response = await fetch(
@@ -18,7 +18,8 @@ export default async function Home() {
       { cache: "no-store" }
     );
     const purchasesData = await response.json();
-    const purchasedIds = purchasesData.map(
+
+    purchaseBookIds = purchasesData.map(
       (purchase: Purchase) => purchase.bookId
     );
 
@@ -33,7 +34,7 @@ export default async function Home() {
               key={book.id}
               book={book}
               user={user}
-              isPurchased={purchasedIds.includes(book.id)}
+              isPurchased={purchaseBookIds.includes(book.id)}
             />
           ))}
         </main>
