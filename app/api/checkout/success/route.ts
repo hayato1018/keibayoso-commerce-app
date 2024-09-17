@@ -11,18 +11,26 @@ export async function POST(request: Request/*, responce: Response*/) {
     try {
         const session = await stripe.checkout.sessions.retrieve(sessionId);
 
+        // オプショナルな値のチェック
+        const clientReferenceId = session.client_reference_id;
+        const bookId = session.metadata?.bookId;
+
+        if (!clientReferenceId || !bookId) {
+            return NextResponse.json({ error: "Invalid session data" });
+        }
+
         const existingPurchase = await prisma.purchase.findFirst({
             where: {
-                userId: session.client_reference_id!,
-                bookId: session.metadata?.bookId!,
+                userId: clientReferenceId,
+                bookId: bookId,
             },
         });
 
         if (!existingPurchase) {
             const purchase = await prisma.purchase.create({
                 data: {
-                    userId: session.client_reference_id!,
-                    bookId: session.metadata?.bookId!,
+                    userId: clientReferenceId,
+                    bookId: bookId,
                 },
             });
             return NextResponse.json({ purchase });
@@ -30,7 +38,10 @@ export async function POST(request: Request/*, responce: Response*/) {
             return NextResponse.json({ message: "すでに購入済みです。" });
         }
 
-    } catch (err: any) {
-        return NextResponse.json(err);
+    } catch (err: unknown) {
+        if (err instanceof Error) {
+            return NextResponse.json({ error: err.message });
+        }
+        return NextResponse.json({ error: "An unknown error occurred" });
     }
 }
