@@ -15,8 +15,6 @@ type BookProps = {
 // eslint-disable-next-line react/display-name
 const Book = ({ book, isPurchased, user }: BookProps) => {
     const [showModal, setShowModal] = useState(false);
-    // const { data: session } = useSession();
-    // const user: any = session?.user;
     const router = useRouter();
 
     const startCheckout = async () => {
