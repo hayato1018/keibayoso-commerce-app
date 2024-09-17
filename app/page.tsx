@@ -10,7 +10,7 @@ export default async function Home() {
   const session = await getServerSession(nextAuthOptions);
   const user = session?.user as User;
 
-  let purchaseBookIds: string[] = [];
+  //let purchaseBookIds: string[] = [];
 
   if (user) {
     const response = await fetch(
@@ -32,6 +32,7 @@ export default async function Home() {
             <Book
               key={book.id}
               book={book}
+              user={user}
               isPurchased={purchasedIds.includes(book.id)}
             />
           ))}

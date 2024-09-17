@@ -10,14 +10,13 @@ type BookProps = {
     book: BookType;
     user: any;
     isPurchased: boolean;
-
 };
 
 // eslint-disable-next-line react/display-name
-const Book = ({ book, user, isPurchased }: BookProps) => {
+const Book = ({ book, isPurchased }: BookProps) => {
     const [showModal, setShowModal] = useState(false);
     const { data: session } = useSession();
-    //const user: any = session?.user;
+    const user: any = session?.user;
     const router = useRouter();
 
     const startCheckout = async () => {
@@ -62,7 +61,7 @@ const Book = ({ book, user, isPurchased }: BookProps) => {
         if (!user) {
             setShowModal(false);
             // ログインページヘリダイレクト
-            router.push("/login");
+            router.push("/api/auth/signin");
         } else {
             // Stripeで決済
             startCheckout();

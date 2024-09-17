@@ -9,7 +9,6 @@ const globalForPrisma = global as unknown as {
 if (!globalForPrisma.prisma) {
     globalForPrisma.prisma = new PrismaClient();
 }
-
 prisma = globalForPrisma.prisma;
 
 export default prisma;
