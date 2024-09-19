@@ -41,7 +41,7 @@ const Header = async () => {
                     )}
 
                     <Link
-                        href={`/profile`}>
+                        href={user ? `/profile` : "/api/auth/signin"}>
                         <Image
                             width={50}
                             height={50}
