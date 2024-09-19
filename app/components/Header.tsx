@@ -1,19 +1,14 @@
-"use client";
 import Image from "next/image";
 import Link from "next/link";
-import React, { useEffect } from "react";
+import React from "react";
 import { getServerSession } from "next-auth";
-import { signIn } from "next-auth/react";
 import { nextAuthOptions } from "../lib/next-auth/options";
 import { User } from "../types/types";
+
 const Header = async () => {
     const session = await getServerSession(nextAuthOptions);
     const user = session?.user as User;
-    useEffect(() => {
-        if (!user) {
-            signIn();
-        }
-    }, [user]);
+
     return (
         <header className="bg-slate-600 text-gray-100 shadow-lg">
             <nav className="flex items-center justify-between p-4">
@@ -33,6 +28,7 @@ const Header = async () => {
                     >
                         {user ? "プロフィール" : "ログイン"}
                     </Link>
+
                     {user ? (
                         < Link
                             href={"/api/auth/signout"}
@@ -43,6 +39,7 @@ const Header = async () => {
                     ) : (
                         ""
                     )}
+
                     <Link
                         href={`/profile`}>
                         <Image
@@ -57,4 +54,5 @@ const Header = async () => {
         </header >
     );
 };
+
 export default Header;
