@@ -21,7 +21,9 @@ const PurchaseDetailBook = ({
                 alt={purchaseDetailBook.title}
                 width={450}
                 height={350}
+                layout="intrinsic"
                 className="rounded-t-md object-cover"
+                style={{ maxWidth: '450px', maxHeight: '350px' }}
             />
             <div className="px-4 py-4 bg-slate-100 rounded-b-md">
                 <h2 className="text-lg font-semibold">{purchaseDetailBook.title}</h2>
