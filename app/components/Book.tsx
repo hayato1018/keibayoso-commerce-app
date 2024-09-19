@@ -95,8 +95,7 @@ const Book = ({ book, isPurchased, user }: BookProps) => {
                         alt={book.title}
                         width={450}
                         height={350}
-                        layout="responsive"
-                        className="rounded-t-md"
+                        className="rounded-t-md object-cover"
                     />
                     <div className="px-4 py-4 bg-slate-100 rounded-b-md">
                         <h2 className="text-lg font-semibold">{book.title}</h2>
