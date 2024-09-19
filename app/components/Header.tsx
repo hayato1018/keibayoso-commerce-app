@@ -1,5 +1,3 @@
-"use client";
-
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";
@@ -43,7 +41,7 @@ const Header = async () => {
                     )}
 
                     <Link
-                        href={`/profile`}>
+                        href={user ? `/profile` : "/api/auth/signin"}>
                         <Image
                             width={50}
                             height={50}
