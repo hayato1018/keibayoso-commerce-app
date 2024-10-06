@@ -13,7 +13,7 @@ const Header = async () => {
         <header className="bg-slate-600 text-gray-100 shadow-lg">
             <nav className="flex items-center justify-between p-4">
                 <Link href={"/"} className="text-xl font-bold">
-                    Book Commerce
+                    Keibayoso Commerce
                 </Link>
                 <div className="flex items-center gap-1">
                     <Link
